@@ -33,10 +33,18 @@ public class UserService {
 		return repo.insert(obj);
 	}
 
+	public void delete(String id) {
+		findById(id);
+		repo.deleteById(id);
+		return;
+	}
+	
 //Polemica. Por que nao colocou na classe UserDTO ? Poderia,
 //mas foi incluido no UserService porque dependendo da situação, para instanciar o User
 //podera ser necessario acessar o banco de dados (private UserRepository repo)
 	public User fromDTO(UserDTO objDto) {
 		return new User(objDto.getId(), objDto.getName(), objDto.getEmail());
 	}
+		
+
 }
