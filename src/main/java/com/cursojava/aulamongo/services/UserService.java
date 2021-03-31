@@ -38,7 +38,18 @@ public class UserService {
 		repo.deleteById(id);
 		return;
 	}
-	
+
+	public User update(User obj) {
+		User newObj = findById(obj.getId());  // busca/instancia user do BD
+		updateData(newObj, obj);
+		return repo.save(obj);
+	}
+
+    private void updateData(User newObj, User obj) {
+    	newObj.setName(obj.getName());
+    	newObj.setEmail(obj.getEmail());
+	}
+
 //Polemica. Por que nao colocou na classe UserDTO ? Poderia,
 //mas foi incluido no UserService porque dependendo da situação, para instanciar o User
 //podera ser necessario acessar o banco de dados (private UserRepository repo)

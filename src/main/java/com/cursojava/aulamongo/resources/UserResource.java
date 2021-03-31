@@ -50,4 +50,11 @@ public class UserResource {
 		service.delete(id);                            
 		return ResponseEntity.noContent().build();
 	}
+	@RequestMapping(value="/{id}",method=RequestMethod.PUT)
+	public ResponseEntity<Void> Update(@RequestBody UserDTO objDto,@PathVariable String id ) {
+		User obj = service.fromDTO(objDto);              // Converte UserDto para User
+		obj.setId(id);                                   // Por que nao pegar o que esta em objDto ?
+		obj = service.update(obj);
+		return ResponseEntity.noContent().build();
+	}
 }
