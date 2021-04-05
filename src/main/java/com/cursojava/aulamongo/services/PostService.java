@@ -1,5 +1,6 @@
 package com.cursojava.aulamongo.services;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,5 +27,11 @@ public class PostService {
 //		return repo.findByTitleContains(text);
 //		return repo.findByTitleContainsIgnoreCase(text);	
 		return repo.searchTitle(text);
+	}
+	public List<Post> fullSearch(String text, Date minDate, Date maxDate) {
+		//Date é armazenada em milisegundos (instant). Temos que considerar até as 24h do dia
+		//Artificio. Joga para meia noite do proximo dia
+		maxDate = new Date(maxDate.getTime() + 24 * 60 *60 * 1000);
+		return repo.fullSearch(text, minDate, maxDate);
 	}
 }
